@@ -19,13 +19,13 @@ export const Scene4Experience: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: colors.ink,
+        background: colors.cream,
         justifyContent: "center",
         padding: "0 80px",
         gap: 30,
       }}
     >
-      <Eyebrow delay={0} color={colors.grapefruit}>
+      <Eyebrow delay={0} color={colors.ink}>
         2018 — Aujourd&apos;hui
       </Eyebrow>
 
@@ -35,12 +35,12 @@ export const Scene4Experience: React.FC = () => {
             fontFamily: outfitFontFamily,
             fontWeight: 800,
             fontSize: 66,
-            color: colors.cream,
+            color: colors.ink,
             lineHeight: 1.05,
             maxWidth: 900,
           }}
         >
-          Responsable Marketing &amp; Communication Groupe
+          Responsable Marketing
         </div>
       </SlideIn>
 
@@ -50,7 +50,8 @@ export const Scene4Experience: React.FC = () => {
             fontFamily: outfitFontFamily,
             fontWeight: 700,
             fontSize: 38,
-            color: colors.lemon,
+            color: colors.ink,
+            opacity: 0.6,
           }}
         >
           DIMEXOI / Groupe ALDAM
@@ -58,7 +59,7 @@ export const Scene4Experience: React.FC = () => {
       </SlideIn>
 
       <div style={{ marginTop: 30 }}>
-        <Marquee items={brands} color={colors.lime} speed={3.6} />
+        <Marquee items={brands} color={colors.ink} speed={3.6} />
       </div>
     </AbsoluteFill>
   );

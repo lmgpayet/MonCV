@@ -15,7 +15,7 @@ export const Scene1Intro: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ background: colors.ink }}>
+    <AbsoluteFill style={{ background: colors.vanilla }}>
       <Confetti
         pieces={[
           { kind: "circle", top: "8%", left: "12%", size: 46, color: colors.lemon, delay: 4, spin: false },
@@ -32,8 +32,8 @@ export const Scene1Intro: React.FC = () => {
           gap: 26,
         }}
       >
-        <Eyebrow delay={2} color={colors.raspberry}>
-          Responsable Com &amp; Marketing Groupe
+        <Eyebrow delay={2} color={colors.ink}>
+          Responsable Marketing
         </Eyebrow>
 
         <PopIn delay={8} from={0.6} rotateFrom={-6}>
@@ -43,13 +43,13 @@ export const Scene1Intro: React.FC = () => {
               fontWeight: 200,
               fontSize: 118,
               lineHeight: 0.95,
-              color: colors.cream,
+              color: colors.ink,
               letterSpacing: "-0.02em",
             }}
           >
             Laurence
             <br />
-            <span style={{ fontWeight: 900, color: colors.lemon }}>
+            <span style={{ fontWeight: 900, color: colors.ink }}>
               Payet
             </span>
           </div>
@@ -59,7 +59,7 @@ export const Scene1Intro: React.FC = () => {
           style={{
             width: `${lineWidth * 280}px`,
             height: 8,
-            background: colors.lime,
+            background: colors.lemon,
             borderRadius: 4,
           }}
         />
@@ -70,7 +70,8 @@ export const Scene1Intro: React.FC = () => {
               fontFamily: outfitFontFamily,
               fontWeight: 500,
               fontSize: 34,
-              color: "rgba(255,255,255,0.75)",
+              color: colors.ink,
+              opacity: 0.65,
               maxWidth: 780,
             }}
           >

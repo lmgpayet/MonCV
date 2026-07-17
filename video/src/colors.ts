@@ -1,12 +1,12 @@
-// Fruit-inspired palette (Lydia Rose Design) — swapped in from the
-// user's reference moodboard: cream / vanilla / lime / lemon /
-// pink grapefruit / raspberry, plus a warm near-black for dark scenes.
+// 3-color brand palette: Beige / Indigo / Celery, plus ink & white
+// neutrals. No dark/full-bleed backgrounds — every scene stays light,
+// with ink/indigo/celery used for text, blocks, buttons and cards.
 export const colors = {
-  ink: "#241417",
-  cream: "#FFFCF5",
-  vanilla: "#F5E9CF",
-  lime: "#BFB74C",
-  lemon: "#F4AF30",
-  grapefruit: "#D96C81",
-  raspberry: "#C02B53",
+  ink: "#1C1A22",
+  cream: "#FFFFFF",
+  vanilla: "#F4F0DD",
+  lime: "#A6C261",
+  lemon: "#A88AED",
+  grapefruit: "#A88AED",
+  raspberry: "#A6C261",
 };

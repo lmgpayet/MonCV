@@ -60,7 +60,8 @@ export const Scene2Hook: React.FC = () => {
             fontFamily: outfitFontFamily,
             fontWeight: 800,
             fontSize: 90,
-            color: colors.raspberry,
+            color: colors.ink,
+            opacity: 0.6,
           }}
         >
           ans

@@ -13,7 +13,7 @@ export const Scene7Outro: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ background: colors.ink }}>
+    <AbsoluteFill style={{ background: colors.vanilla }}>
       <Confetti
         pieces={[
           { kind: "star", top: "10%", left: "14%", size: 54, color: colors.lemon, delay: 20, spin: true },
@@ -37,12 +37,12 @@ export const Scene7Outro: React.FC = () => {
               fontFamily: outfitFontFamily,
               fontWeight: 900,
               fontSize: 96,
-              color: colors.cream,
+              color: colors.ink,
               letterSpacing: "-0.02em",
               lineHeight: 1,
             }}
           >
-            Laurence <span style={{ color: colors.lemon }}>Payet</span>
+            Laurence Payet
           </div>
         </PopIn>
 
@@ -53,7 +53,7 @@ export const Scene7Outro: React.FC = () => {
               alignItems: "center",
               gap: 20,
               background: colors.raspberry,
-              color: colors.cream,
+              color: colors.ink,
               fontFamily: outfitFontFamily,
               fontWeight: 700,
               fontSize: 36,
@@ -70,7 +70,8 @@ export const Scene7Outro: React.FC = () => {
             style={{
               fontFamily: spaceMonoFontFamily,
               fontSize: 26,
-              color: "rgba(255,255,255,0.7)",
+              color: colors.ink,
+              opacity: 0.6,
               letterSpacing: "0.05em",
               display: "flex",
               flexDirection: "column",
@@ -84,7 +85,7 @@ export const Scene7Outro: React.FC = () => {
       </AbsoluteFill>
 
       <AbsoluteFill
-        style={{ background: colors.lemon, opacity: flash }}
+        style={{ background: colors.lemon, opacity: flash * 0.5 }}
       />
     </AbsoluteFill>
   );
