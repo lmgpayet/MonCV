@@ -37,8 +37,8 @@ const skills: {
 
 export const Scene5Skills: React.FC = () => {
   return (
-    <AbsoluteFill style={{ background: colors.buttercup, padding: "70px 80px" }}>
-      <Eyebrow delay={0} color={colors.dark}>
+    <AbsoluteFill style={{ background: colors.lime, padding: "70px 80px" }}>
+      <Eyebrow delay={0} color={colors.ink}>
         Mes compétences
       </Eyebrow>
 
@@ -56,7 +56,7 @@ export const Scene5Skills: React.FC = () => {
           <SlideIn key={s.num} delay={s.delay} direction={s.dir} distance={120}>
             <div
               style={{
-                background: colors.dark,
+                background: colors.ink,
                 borderRadius: 22,
                 padding: "28px 36px",
                 display: "flex",
@@ -68,7 +68,7 @@ export const Scene5Skills: React.FC = () => {
                 style={{
                   fontFamily: spaceMonoFontFamily,
                   fontSize: 30,
-                  color: colors.burnt,
+                  color: colors.raspberry,
                   fontWeight: 700,
                 }}
               >

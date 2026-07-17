@@ -1,4 +1,4 @@
-import { Composition } from "remotion";
+import { Audio, Composition, Sequence, staticFile } from "remotion";
 import { TransitionSeries, springTiming } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { wipe } from "@remotion/transitions/wipe";
@@ -11,6 +11,14 @@ import { Scene4Experience } from "./scenes/Scene4Experience";
 import { Scene5Skills } from "./scenes/Scene5Skills";
 import { Scene6Tools } from "./scenes/Scene6Tools";
 import { Scene7Outro } from "./scenes/Scene7Outro";
+import { sfxCues } from "./audioCues";
+
+const SFX_FILES = {
+  pop: "audio/pop.wav",
+  "pop-low": "audio/pop-low.wav",
+  whoosh: "audio/whoosh.wav",
+  impact: "audio/impact.wav",
+};
 
 const TRANSITION_DURATION = 15;
 const timing = () =>
@@ -25,7 +33,7 @@ const TOTAL_DURATION =
   SCENE_DURATIONS.reduce((a, b) => a + b, 0) -
   NUM_TRANSITIONS * TRANSITION_DURATION;
 
-export const CvIntroVideo: React.FC = () => {
+const Scenes: React.FC = () => {
   return (
     <TransitionSeries>
       <TransitionSeries.Sequence durationInFrames={SCENE_DURATIONS[0]}>
@@ -89,6 +97,25 @@ export const CvIntroVideo: React.FC = () => {
         <Scene7Outro />
       </TransitionSeries.Sequence>
     </TransitionSeries>
+  );
+};
+
+export const CvIntroVideo: React.FC = () => {
+  return (
+    <>
+      <Scenes />
+
+      <Audio src={staticFile("audio/background-beat.wav")} volume={() => 0.55} />
+
+      {sfxCues.map((cue, i) => (
+        <Sequence key={i} from={cue.frame} durationInFrames={20} layout="none">
+          <Audio
+            src={staticFile(SFX_FILES[cue.src])}
+            volume={() => cue.volume}
+          />
+        </Sequence>
+      ))}
+    </>
   );
 };
 

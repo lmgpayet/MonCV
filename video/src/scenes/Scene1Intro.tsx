@@ -15,13 +15,13 @@ export const Scene1Intro: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ background: colors.dark }}>
+    <AbsoluteFill style={{ background: colors.ink }}>
       <Confetti
         pieces={[
-          { kind: "circle", top: "8%", left: "12%", size: 46, color: colors.buttercup, delay: 4, spin: false },
-          { kind: "star", top: "14%", left: "78%", size: 70, color: colors.burnt, delay: 10, spin: true },
-          { kind: "triangle", top: "78%", left: "16%", size: 60, color: colors.frost, delay: 16, spin: true },
-          { kind: "circle", top: "82%", left: "82%", size: 34, color: colors.burnt, delay: 22, spin: false },
+          { kind: "circle", top: "8%", left: "12%", size: 46, color: colors.lemon, delay: 4, spin: false },
+          { kind: "star", top: "14%", left: "78%", size: 70, color: colors.raspberry, delay: 10, spin: true },
+          { kind: "triangle", top: "78%", left: "16%", size: 60, color: colors.grapefruit, delay: 16, spin: true },
+          { kind: "circle", top: "82%", left: "82%", size: 34, color: colors.lime, delay: 22, spin: false },
         ]}
       />
       <AbsoluteFill
@@ -32,7 +32,7 @@ export const Scene1Intro: React.FC = () => {
           gap: 26,
         }}
       >
-        <Eyebrow delay={2} color={colors.burnt}>
+        <Eyebrow delay={2} color={colors.raspberry}>
           Responsable Com &amp; Marketing Groupe
         </Eyebrow>
 
@@ -49,7 +49,7 @@ export const Scene1Intro: React.FC = () => {
           >
             Laurence
             <br />
-            <span style={{ fontWeight: 900, color: colors.burnt }}>
+            <span style={{ fontWeight: 900, color: colors.lemon }}>
               Payet
             </span>
           </div>
@@ -59,7 +59,7 @@ export const Scene1Intro: React.FC = () => {
           style={{
             width: `${lineWidth * 280}px`,
             height: 8,
-            background: colors.buttercup,
+            background: colors.lime,
             borderRadius: 4,
           }}
         />

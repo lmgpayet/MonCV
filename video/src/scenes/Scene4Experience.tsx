@@ -19,13 +19,13 @@ export const Scene4Experience: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: colors.dark,
+        background: colors.ink,
         justifyContent: "center",
         padding: "0 80px",
         gap: 30,
       }}
     >
-      <Eyebrow delay={0} color={colors.frost}>
+      <Eyebrow delay={0} color={colors.grapefruit}>
         2018 — Aujourd&apos;hui
       </Eyebrow>
 
@@ -50,7 +50,7 @@ export const Scene4Experience: React.FC = () => {
             fontFamily: outfitFontFamily,
             fontWeight: 700,
             fontSize: 38,
-            color: colors.burnt,
+            color: colors.lemon,
           }}
         >
           DIMEXOI / Groupe ALDAM
@@ -58,7 +58,7 @@ export const Scene4Experience: React.FC = () => {
       </SlideIn>
 
       <div style={{ marginTop: 30 }}>
-        <Marquee items={brands} color={colors.buttercup} speed={3.6} />
+        <Marquee items={brands} color={colors.lime} speed={3.6} />
       </div>
     </AbsoluteFill>
   );

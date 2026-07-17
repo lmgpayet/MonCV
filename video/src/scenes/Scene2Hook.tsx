@@ -30,7 +30,7 @@ export const Scene2Hook: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: colors.burnt,
+        background: colors.lemon,
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -49,7 +49,7 @@ export const Scene2Hook: React.FC = () => {
             fontWeight: 900,
             fontSize: 340,
             lineHeight: 1,
-            color: colors.dark,
+            color: colors.ink,
             letterSpacing: "-0.03em",
           }}
         >
@@ -60,7 +60,7 @@ export const Scene2Hook: React.FC = () => {
             fontFamily: outfitFontFamily,
             fontWeight: 800,
             fontSize: 90,
-            color: colors.cream,
+            color: colors.raspberry,
           }}
         >
           ans
@@ -72,7 +72,7 @@ export const Scene2Hook: React.FC = () => {
           fontFamily: spaceMonoFontFamily,
           fontSize: 26,
           letterSpacing: "0.08em",
-          color: colors.dark,
+          color: colors.ink,
           marginTop: 20,
           textAlign: "center",
           maxWidth: 780,

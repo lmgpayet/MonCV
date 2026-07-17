@@ -13,12 +13,12 @@ export const Scene7Outro: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ background: colors.dark }}>
+    <AbsoluteFill style={{ background: colors.ink }}>
       <Confetti
         pieces={[
-          { kind: "star", top: "10%", left: "14%", size: 54, color: colors.buttercup, delay: 20, spin: true },
-          { kind: "circle", top: "16%", left: "76%", size: 40, color: colors.frost, delay: 26, spin: false },
-          { kind: "triangle", top: "80%", left: "70%", size: 56, color: colors.burnt, delay: 32, spin: true },
+          { kind: "star", top: "10%", left: "14%", size: 54, color: colors.lemon, delay: 20, spin: true },
+          { kind: "circle", top: "16%", left: "76%", size: 40, color: colors.lime, delay: 26, spin: false },
+          { kind: "triangle", top: "80%", left: "70%", size: 56, color: colors.grapefruit, delay: 32, spin: true },
         ]}
       />
 
@@ -42,7 +42,7 @@ export const Scene7Outro: React.FC = () => {
               lineHeight: 1,
             }}
           >
-            Laurence <span style={{ color: colors.burnt }}>Payet</span>
+            Laurence <span style={{ color: colors.lemon }}>Payet</span>
           </div>
         </PopIn>
 
@@ -52,7 +52,7 @@ export const Scene7Outro: React.FC = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: 20,
-              background: colors.burnt,
+              background: colors.raspberry,
               color: colors.cream,
               fontFamily: outfitFontFamily,
               fontWeight: 700,
@@ -84,7 +84,7 @@ export const Scene7Outro: React.FC = () => {
       </AbsoluteFill>
 
       <AbsoluteFill
-        style={{ background: colors.buttercup, opacity: flash }}
+        style={{ background: colors.lemon, opacity: flash }}
       />
     </AbsoluteFill>
   );

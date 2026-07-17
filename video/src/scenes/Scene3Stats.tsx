@@ -15,7 +15,7 @@ const stats: { num: string; label: string; delay: number; rot: number }[] = [
 export const Scene3Stats: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: colors.cream, padding: "70px 80px" }}>
-      <Eyebrow delay={0} color={colors.burnt}>
+      <Eyebrow delay={0} color={colors.raspberry}>
         En chiffres
       </Eyebrow>
 
@@ -35,7 +35,7 @@ export const Scene3Stats: React.FC = () => {
             from={0.5}
             rotateFrom={s.rot}
             style={{
-              background: i % 2 === 0 ? colors.dark : colors.burnt,
+              background: i % 2 === 0 ? colors.ink : colors.raspberry,
               borderRadius: 24,
               display: "flex",
               flexDirection: "column",
