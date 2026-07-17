@@ -8,15 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
+  /* 3-color brand palette: Beige / Indigo / Celery, plus ink & white neutrals */
   --cream: #FFFFFF;
-  --dark: #111111;
-  --burnt: #ea6903;
-  --burnt-light: rgba(234,105,3,0.10);
-  --buttercup: #f5c421;
-  --frost: #9fbde1;
-  --mid: #666666;
-  --light-mid: #E0E0E0;
-  --paper: #F7F7F7;
+  --ink: #1C1A22;
+  --burnt: #A88AED;
+  --burnt-light: rgba(168,138,237,0.14);
+  --buttercup: #A6C261;
+  --frost: #A88AED;
+  --lime: #A6C261;
+  --mid: #6B6570;
+  --light-mid: #EAE4CE;
+  --paper: #F4F0DD;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -24,25 +26,50 @@ html { scroll-behavior:smooth; }
 
 body {
   font-family:'DM Sans',sans-serif;
-  color:var(--dark);
+  color:var(--ink);
   background:var(--cream);
   -webkit-font-smoothing:antialiased;
 }
 
 
 /* REVEAL */
-.r { opacity:0; transform:translateY(40px); transition:opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+.r { opacity:0; transform:translateY(40px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
 .r.v { opacity:1; transform:translateY(0); }
-.r-l { opacity:0; transform:translateX(-60px); transition:opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+.r-l { opacity:0; transform:translateX(-60px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
 .r-l.v { opacity:1; transform:translateX(0); }
-.r-r { opacity:0; transform:translateX(60px); transition:opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+.r-r { opacity:0; transform:translateX(60px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1); }
 .r-r.v { opacity:1; transform:translateX(0); }
+
+/* POP — kinetic, bouncy scale-in used for cards/pills/badges (matches the intro video) */
+.pop { opacity:0; transform:scale(0.4) rotate(-6deg); transition:opacity 0.7s cubic-bezier(0.34,1.56,0.64,1), transform 0.7s cubic-bezier(0.34,1.56,0.64,1); }
+.pop.v { opacity:1; transform:scale(1) rotate(0deg); }
+.pop-r { opacity:0; transform:scale(0.4) rotate(6deg); transition:opacity 0.7s cubic-bezier(0.34,1.56,0.64,1), transform 0.7s cubic-bezier(0.34,1.56,0.64,1); }
+.pop-r.v { opacity:1; transform:scale(1) rotate(0deg); }
+
+/* Floating confetti accents */
+.confetti { position:absolute; pointer-events:none; z-index:0; opacity:0; animation:confettiIn 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards, confettiFloat 4s ease-in-out infinite; }
+@keyframes confettiIn { to { opacity:1; } }
+@keyframes confettiFloat { 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-14px) rotate(8deg); } }
+.confetti-circle { border-radius:50%; }
+.confetti-triangle { width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-bottom:28px solid currentColor; }
+.confetti-square { border-radius:6px; }
+
+/* Auto-scrolling brand marquee (matches the intro video's ticker) */
+.marquee { overflow:hidden; width:100%; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.marquee-track { display:flex; width:max-content; animation:marqueeScroll 18s linear infinite; }
+.marquee-item {
+  font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem;
+  color:var(--ink); white-space:nowrap; display:flex; align-items:center; gap:20px;
+  margin-right:20px;
+}
+.marquee-item span { opacity:0.35; font-weight:400; color:var(--burnt); }
+@keyframes marqueeScroll { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
 /* Smooth scroll */
 html { scroll-behavior:smooth; }
 
 /* Nav active state */
-.nav-links a.nav-active { color:var(--burnt); }
+.nav-links a.nav-active { color:var(--ink); font-weight:700; }
 
 
 /* NAV */
@@ -60,7 +87,7 @@ nav {
 .nav-logo {
   font-family:'Outfit',sans-serif;
   font-size:1.4rem; font-weight:800; letter-spacing:-0.02em;
-  color:var(--dark); text-decoration:none;
+  color:var(--ink); text-decoration:none;
 }
 .nav-links { display:flex; gap:28px; align-items:center; }
 .nav-links a {
@@ -68,18 +95,20 @@ nav {
   font-size:0.65rem; color:var(--mid); letter-spacing:0.12em;
   text-transform:uppercase; transition:color 0.3s;
 }
-.nav-links a:hover { color:var(--burnt); }
+.nav-links a:hover { color:var(--ink); }
 .nav-cta-link {
-  background:var(--burnt)!important; color:#fff!important;
+  background:var(--burnt)!important; color:var(--ink)!important;
   padding:8px 20px!important; transition:background 0.3s!important;
   border-radius:50px!important;
 }
-.nav-cta-link:hover { background:var(--buttercup)!important; color:var(--dark)!important; }
+.nav-cta-link:hover { background:var(--buttercup)!important; color:var(--ink)!important; }
 
 /* HERO */
 .hero {
   display:flex; align-items:center;
-  padding:80px 40px 40px; position:relative;
+  padding:140px 40px 60px; position:relative;
+  background:var(--paper); color:var(--ink);
+  overflow:hidden;
 }
 .hero-inner {
   max-width:1200px; margin:0 auto; width:100%;
@@ -88,18 +117,21 @@ nav {
 .hero-eyebrow {
   font-family:'Space Mono',monospace;
   font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase;
-  color:var(--burnt); margin-bottom:16px;
+  color:var(--ink); margin-bottom:16px;
   display:flex; align-items:center; gap:12px;
 }
 .hero-eyebrow::before {
-  content:''; width:40px; height:1px; background:var(--burnt);
+  content:''; width:0; height:2px; background:var(--burnt);
+  transition:width 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.15s;
 }
+.hero-eyebrow.v::before { width:40px; }
 .hero-name {
   font-family:'Outfit',sans-serif;
   font-size:5.5rem; font-weight:200; line-height:0.95;
   margin-bottom:24px; letter-spacing:-0.02em;
+  color:var(--ink);
 }
-.hero-name strong { font-weight:900; color:var(--burnt); }
+.hero-name strong { font-weight:900; color:var(--ink); }
 .hero-desc {
   font-size:1.05rem; color:var(--mid); line-height:1.8;
   max-width:480px; margin-bottom:32px;
@@ -108,19 +140,21 @@ nav {
 .btn-dark {
   display:inline-flex; align-items:center; gap:8px;
   padding:14px 28px; font-size:0.78rem; font-weight:700;
-  text-decoration:none; background:var(--burnt); color:#fff;
+  text-decoration:none; background:var(--burnt); color:var(--ink);
   font-family:'DM Sans',sans-serif; letter-spacing:0.04em;
-  transition:all 0.4s; border:none; cursor:pointer; border-radius:50px;
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1), background 0.3s, color 0.3s;
+  border:none; cursor:pointer; border-radius:50px;
 }
-.btn-dark:hover { background:var(--buttercup); color:var(--dark); }
+.btn-dark:hover { background:var(--buttercup); color:var(--ink); transform:scale(1.06) rotate(-1deg); }
 .btn-ghost {
   display:inline-flex; align-items:center; gap:8px;
   padding:14px 28px; font-size:0.78rem; font-weight:700;
-  text-decoration:none; background:transparent; color:var(--dark);
-  border:1.5px solid var(--dark); font-family:'DM Sans',sans-serif;
-  letter-spacing:0.04em; transition:all 0.4s; cursor:pointer; border-radius:50px;
+  text-decoration:none; background:transparent; color:var(--ink);
+  border:1.5px solid var(--ink); font-family:'DM Sans',sans-serif;
+  letter-spacing:0.04em; cursor:pointer; border-radius:50px;
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1), background 0.3s, color 0.3s;
 }
-.btn-ghost:hover { background:var(--dark); color:#fff; }
+.btn-ghost:hover { background:var(--ink); color:var(--cream); transform:scale(1.06) rotate(1deg); }
 
 .hero-photo-col { position:relative; display:flex; justify-content:flex-end; }
 .hero-photo-frame { position:relative; }
@@ -137,23 +171,24 @@ nav {
 
 /* STATS STRIP */
 .stats-strip {
-  background:var(--burnt); color:#fff; padding:28px 40px;
+  background:var(--buttercup); color:var(--ink); padding:36px 40px;
 }
 .stats-inner {
   max-width:1200px; margin:0 auto;
   display:grid; grid-template-columns:repeat(4,1fr); gap:40px;
 }
-.stat-block {}
+.stat-block { transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+.stat-block:hover { transform:scale(1.08) rotate(-2deg); }
 .stat-num {
   font-family:'Outfit',sans-serif;
   font-size:3.5rem; font-weight:200; line-height:1;
-  color:#fff;
+  color:var(--ink);
 }
-.stat-num span { font-size:1.8rem; }
+.stat-num span { font-size:1.8rem; color:var(--ink); opacity:0.55; }
 .stat-lbl {
   font-family:'Space Mono',monospace;
   font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase;
-  color:rgba(255,255,255,0.7); margin-top:6px;
+  color:rgba(28,26,34,0.65); margin-top:6px;
 }
 
 /* SECTIONS */
@@ -162,106 +197,119 @@ section { padding:80px 40px; }
 .sec-eyebrow {
   font-family:'Space Mono',monospace;
   font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase;
-  color:var(--burnt); margin-bottom:10px;
+  color:var(--ink); margin-bottom:10px;
   display:flex; align-items:center; gap:12px;
 }
-.sec-eyebrow::before { content:''; width:30px; height:1px; background:var(--burnt); }
+.sec-eyebrow::before {
+  content:''; width:0; height:2px; background:var(--ink);
+  transition:width 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s;
+}
+.sec-eyebrow.v::before { width:30px; }
 .sec-title {
   font-family:'Outfit',sans-serif;
   font-size:3.2rem; font-weight:300; line-height:1.1; letter-spacing:-0.02em; margin-bottom:12px;
 }
-.sec-title em { font-weight:800; font-style:normal; color:var(--burnt); }
+.sec-title em { font-weight:800; font-style:normal; color:var(--ink); }
 .sec-desc { font-size:0.92rem; color:var(--mid); max-width:560px; margin-bottom:48px; line-height:1.7; }
 
 /* EXPERIENCE */
 .exp-card {
   background:var(--paper); border-left:3px solid var(--burnt);
   padding:36px 40px; position:relative; margin-bottom:0;
-  border-radius:16px;
+  border-radius:16px; color:var(--ink);
 }
 .exp-date {
   font-family:'Space Mono',monospace;
-  font-size:0.65rem; color:var(--burnt); letter-spacing:0.1em; margin-bottom:10px;
+  font-size:0.65rem; color:var(--ink); opacity:0.6; letter-spacing:0.1em; margin-bottom:10px;
 }
 .exp-role {
   font-family:'Outfit',sans-serif;
   font-size:1.8rem; font-weight:800; margin-bottom:4px;
 }
-.exp-company { font-size:0.88rem; color:var(--burnt); font-weight:600; margin-bottom:4px; }
+.exp-company { font-size:0.88rem; color:var(--ink); font-weight:700; margin-bottom:4px; }
 .exp-scope { font-size:0.75rem; color:var(--mid); font-style:italic; margin-bottom:20px; }
 .exp-list { display:grid; gap:8px; }
 .exp-item {
-  font-size:0.82rem; color:var(--dark); line-height:1.7; padding-left:20px; position:relative;
+  font-size:0.82rem; color:var(--ink); line-height:1.7; padding-left:20px; position:relative;
 }
 .exp-item::before {
   content:'→'; position:absolute; left:0; color:var(--burnt); font-weight:700;
 }
 
 /* SKILLS */
+#competences { background:var(--lime); }
 .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
 .skill-cell {
-  background:var(--paper); padding:32px 28px;
-  transition:all 0.4s; border-radius:16px;
+  background:var(--ink); color:var(--cream); padding:32px 28px;
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.3s; border-radius:16px;
 }
-.skill-cell:hover { background:var(--frost); color:var(--dark); }
+.skill-cell:hover { background:var(--burnt); color:var(--ink); transform:scale(1.04) rotate(-1deg); }
+.skill-cell:hover h3, .skill-cell:hover .skill-num { color:var(--ink); }
+.skill-cell:hover p { color:rgba(28,26,34,0.65); }
 .skill-num {
   font-family:'Outfit',sans-serif;
-  font-size:2.8rem; font-weight:200; color:var(--light-mid); line-height:1;
+  font-size:2.8rem; font-weight:200; color:var(--buttercup); line-height:1;
   margin-bottom:8px;
 }
 .skill-cell h3 {
   font-family:'Outfit',sans-serif;
   font-size:1.15rem; font-weight:700; margin-bottom:8px;
+  color:var(--cream);
 }
-.skill-cell p { font-size:0.78rem; color:var(--mid); line-height:1.7; }
+.skill-cell p { font-size:0.78rem; color:rgba(255,252,245,0.6); line-height:1.7; }
 
-/* STACK */
-#stack { background:var(--paper); }
+/* STACK — bold bouncing pills on indigo, mirrors the intro video's tools scene */
+#stack { background:var(--frost); }
 .stack-row { display:flex; flex-direction:column; gap:24px; }
 .stack-cat { display:flex; align-items:baseline; gap:20px; flex-wrap:wrap; }
 .stack-cat-label {
   font-family:'Space Mono',monospace;
   font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--mid); min-width:180px; flex-shrink:0;
+  color:var(--ink); opacity:0.65; min-width:180px; flex-shrink:0;
 }
-.stack-pills { display:flex; gap:8px; flex-wrap:wrap; }
+.stack-pills { display:flex; gap:10px; flex-wrap:wrap; }
 .pill {
   font-family:'Space Mono',monospace;
-  font-size:0.68rem; padding:6px 14px;
-  border:1px solid var(--light-mid); color:var(--dark);
-  transition:all 0.3s; background:var(--cream); border-radius:50px;
+  font-weight:700; font-size:0.7rem; padding:10px 20px;
+  border:none; color:var(--cream);
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
+  background:var(--ink); border-radius:50px;
 }
-.pill:hover { border-color:var(--burnt); color:var(--burnt); }
-.pill.accent { background:var(--buttercup); color:var(--dark); border-color:var(--buttercup); }
+.pill:nth-of-type(2n) { background:var(--cream); color:var(--ink); }
+.pill:hover { transform:scale(1.1) rotate(-3deg); }
+.pill.accent { background:var(--buttercup); color:var(--ink); }
 
 /* DIPLOMES */
+#diplomes { background:var(--paper); }
 .dip-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.dip-cell { background:var(--paper); padding:28px 24px; border-radius:16px; }
+.dip-cell {
+  background:var(--cream); padding:28px 24px; border-radius:16px;
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.dip-cell:hover { transform:scale(1.05) rotate(1deg); }
 .dip-year {
   font-family:'Outfit',sans-serif;
-  font-size:3rem; font-weight:200; color:var(--light-mid); line-height:1; margin-bottom:8px;
+  font-size:3rem; font-weight:200; color:var(--ink); opacity:0.28; line-height:1; margin-bottom:8px;
 }
 .dip-cell h3 { font-size:0.9rem; font-weight:700; margin-bottom:4px; }
 .dip-cell p { font-size:0.78rem; color:var(--mid); }
 .dip-tag {
   display:inline-block; margin-top:8px;
   font-family:'Space Mono',monospace;
-  font-size:0.58rem; color:var(--burnt); letter-spacing:0.08em;
-  text-transform:uppercase; border-bottom:1px solid var(--burnt);
+  font-size:0.58rem; color:var(--ink); opacity:0.7; letter-spacing:0.08em;
+  text-transform:uppercase; border-bottom:1px solid var(--ink);
   padding-bottom:1px;
 }
 
 /* PORTFOLIO */
-#portfolio { background:var(--dark); color:#fff; padding:100px 40px; border-radius:32px; margin:0 16px; }
-#portfolio .sec-eyebrow { color:var(--buttercup); }
-#portfolio .sec-eyebrow::before { background:var(--buttercup); }
-#portfolio .sec-title { color:#fff; }
-#portfolio .sec-title em { color:var(--buttercup); }
-#portfolio .sec-desc { color:rgba(255,255,255,0.6); }
+#portfolio { background:var(--cream); padding:100px 40px; border-radius:32px; margin:0 16px; }
+
+/* EXPERIENCE — light section, mirrors the intro video's marquee scene */
+#experience { background:var(--cream); }
 .port-section-label {
   font-family:'Space Mono',monospace;
   font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--burnt); margin-bottom:16px; margin-top:48px;
+  color:var(--ink); opacity:0.6; margin-bottom:16px; margin-top:48px;
 }
 .port-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
 .port-item { position:relative; overflow:hidden; cursor:pointer; border-radius:12px; }
@@ -348,7 +396,7 @@ section { padding:80px 40px; }
 .carousel-dot {
   width:8px; height:8px;
   border-radius:50%;
-  background:rgba(255,255,255,0.15);
+  background:rgba(28,26,34,0.15);
   border:none; cursor:pointer;
   transition:all 0.3s;
   padding:0;
@@ -364,7 +412,7 @@ section { padding:80px 40px; }
   margin-top:10px;
   font-family:'Space Mono',monospace;
   font-size:0.6rem;
-  color:rgba(255,255,255,0.2);
+  color:rgba(28,26,34,0.35);
   letter-spacing:0.1em;
   text-transform:uppercase;
 }
@@ -383,13 +431,13 @@ section { padding:80px 40px; }
   gap:3px; margin-top:16px;
 }
 .site-card {
-  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+  background:var(--cream); border:1px solid var(--light-mid);
   padding:24px; transition:all 0.3s; border-radius:16px;
 }
-.site-card:hover { border-color:var(--buttercup); background:rgba(255,255,255,0.1); }
+.site-card:hover { border-color:var(--burnt); background:var(--paper); }
 .site-card-tag {
   font-family:'Space Mono',monospace;
-  font-size:0.55rem; color:var(--burnt); text-transform:uppercase;
+  font-size:0.55rem; color:var(--ink); opacity:0.6; text-transform:uppercase;
   letter-spacing:0.1em; margin-bottom:6px;
 }
 .site-card h4 {
@@ -400,33 +448,34 @@ section { padding:80px 40px; }
 .site-links { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
 .site-links a {
   font-family:'Space Mono',monospace;
-  font-size:0.7rem; color:var(--buttercup); text-decoration:none;
-  border:1px solid var(--buttercup); padding:8px 18px;
+  font-size:0.7rem; color:var(--ink); text-decoration:none;
+  border:1px solid var(--ink); padding:8px 18px;
   transition:all 0.3s; letter-spacing:0.05em; border-radius:50px;
 }
-.site-links a:hover { background:var(--buttercup); color:var(--dark); }
+.site-links a:hover { background:var(--buttercup); color:var(--ink); }
 
-/* CONTACT */
-#contact { background:var(--paper); }
+/* CONTACT — outro scene: light section, bold pop cards, mirrors the intro video's ending */
+#contact { background:var(--paper); position:relative; overflow:hidden; }
 .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
 .contact-cell {
-  background:var(--paper); padding:36px 24px; text-align:center;
-  text-decoration:none; color:var(--dark); display:block;
-  transition:all 0.3s; border-radius:16px;
+  background:var(--burnt); padding:36px 24px; text-align:center;
+  text-decoration:none; color:var(--ink); display:block;
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1), background 0.3s; border-radius:20px;
 }
-.contact-cell:hover { background:var(--frost); }
+.contact-cell:nth-of-type(2n) { background:var(--buttercup); }
+.contact-cell:hover { background:var(--cream); color:var(--ink); transform:scale(1.06) rotate(-1deg); }
 .contact-cell .cc-icon { font-size:1.6rem; margin-bottom:10px; }
 .contact-cell h3 {
   font-family:'Outfit',sans-serif;
   font-size:1.1rem; font-weight:700; margin-bottom:4px;
 }
-.contact-cell p { font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--mid); }
+.contact-cell p { font-family:'Space Mono',monospace; font-size:0.65rem; opacity:0.75; }
 
 /* FOOTER */
 footer {
   padding:24px 40px; text-align:center;
   font-family:'Space Mono',monospace;
-  font-size:0.6rem; color:var(--mid); letter-spacing:0.08em;
+  font-size:0.6rem; color:rgba(28,26,34,0.4); letter-spacing:0.08em;
 }
 
 /* HAMBURGER */
@@ -438,7 +487,7 @@ footer {
 }
 .hamburger span {
   display:block; position:absolute; left:0;
-  width:100%; height:2px; background:var(--dark);
+  width:100%; height:2px; background:var(--ink);
   transition:all 0.3s;
 }
 .hamburger span:nth-child(1) { top:0; }
@@ -466,10 +515,10 @@ footer {
 .mobile-menu a {
   font-family:'Outfit',sans-serif;
   font-size:1.6rem; font-weight:300;
-  text-decoration:none; color:var(--dark);
+  text-decoration:none; color:var(--ink);
   transition:color 0.3s;
 }
-.mobile-menu a:hover, .mobile-menu a.nav-active { color:var(--burnt); }
+.mobile-menu a:hover, .mobile-menu a.nav-active { color:var(--ink); opacity:0.6; }
 
 /* RESPONSIVE */
 @media (max-width:900px) {
@@ -537,12 +586,19 @@ footer {
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <div class="confetti confetti-circle" style="top:12%;left:6%;width:20px;height:20px;background:var(--buttercup);animation-delay:.1s,0s;"></div>
+  <div class="confetti confetti-triangle" style="top:72%;left:4%;color:var(--lime);animation-delay:.3s,.4s;"></div>
+  <div class="confetti confetti-square" style="top:20%;left:88%;width:22px;height:22px;background:var(--frost);animation-delay:.2s,.8s;"></div>
+  <div class="confetti confetti-circle" style="top:80%;left:90%;width:14px;height:14px;background:var(--burnt);animation-delay:.4s,.2s;"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow r">Responsable Communication & Marketing Groupe</div>
-      <h1 class="hero-name r" style="transition-delay:0.1s">Laurence<br><strong>Payet</strong></h1>
-      <p class="hero-desc r" style="transition-delay:0.2s"><strong style="color:var(--burnt);font-size:1.2rem;font-weight:800;">7 ans</strong> de pilotage stratégique de la communication multimarques en totale autonomie — avec une appétence forte pour le no-code, l'IA et la création manuelle.</p>
-      <div class="hero-actions r" style="transition-delay:0.3s">
+      <div class="hero-eyebrow r">Responsable Marketing</div>
+      <h1 class="hero-name">
+        <span class="pop" style="transition-delay:0.1s;display:inline-block;">Laurence</span><br>
+        <strong class="pop" style="transition-delay:0.22s;display:inline-block;">Payet</strong>
+      </h1>
+      <p class="hero-desc r" style="transition-delay:0.34s"><strong style="color:var(--ink);font-size:1.2rem;font-weight:800;">7 ans</strong> de pilotage stratégique de la communication multimarques en totale autonomie — avec une appétence forte pour le no-code, l'IA et la création manuelle.</p>
+      <div class="hero-actions r" style="transition-delay:0.44s">
         <a href="mailto:p.laurence140297@gmail.com" class="btn-dark">Contactez-moi</a>
         <a href="tel:+262692430106" class="btn-ghost">0692 43 01 06</a>
       </div>
@@ -558,10 +614,10 @@ footer {
 <!-- STATS -->
 <div class="stats-strip">
   <div class="stats-inner">
-    <div class="stat-block r"><div class="stat-num">7<span>+</span></div><div class="stat-lbl">années d'expérience</div></div>
-    <div class="stat-block r" style="transition-delay:0.1s"><div class="stat-num">5<span>+</span></div><div class="stat-lbl">marques pilotées</div></div>
-    <div class="stat-block r" style="transition-delay:0.2s"><div class="stat-num">5<span>+</span></div><div class="stat-lbl">sites web & apps</div></div>
-    <div class="stat-block r" style="transition-delay:0.3s"><div class="stat-num">1</div><div class="stat-lbl">saas métier interne</div></div>
+    <div class="stat-block pop"><div class="stat-num"><span class="stat-count" data-target="7">0</span><span>+</span></div><div class="stat-lbl">années d'expérience</div></div>
+    <div class="stat-block pop" style="transition-delay:0.08s"><div class="stat-num"><span class="stat-count" data-target="5">0</span><span>+</span></div><div class="stat-lbl">marques pilotées</div></div>
+    <div class="stat-block pop" style="transition-delay:0.16s"><div class="stat-num"><span class="stat-count" data-target="5">0</span><span>+</span></div><div class="stat-lbl">sites web & apps</div></div>
+    <div class="stat-block pop" style="transition-delay:0.24s"><div class="stat-num"><span class="stat-count" data-target="1">0</span></div><div class="stat-lbl">saas métier interne</div></div>
   </div>
 </div>
 </section>
@@ -574,7 +630,7 @@ footer {
     <p class="sec-desc r">Une trajectoire construite dans l'exigence et l'autonomie complète.</p>
     <div class="exp-card r">
       <div class="exp-date">2018 — AUJOURD'HUI</div>
-      <div class="exp-role">Responsable Marketing & Communication Groupe</div>
+      <div class="exp-role">Responsable Marketing</div>
       <div class="exp-company">DIMEXOI / Groupe ALDAM</div>
       <div class="exp-scope">DIMEXOI · Bois d'Orient · Cœur d'Acier · CHR Discount OI · Addario Cuisines · Star Literie</div>
       <div class="exp-list">
@@ -588,22 +644,39 @@ footer {
         <div class="exp-item">Gestion autonome du poste, sans relais interne formé</div>
       </div>
     </div>
+
+    <div class="marquee r" style="margin-top:32px;">
+      <div class="marquee-track">
+        <span class="marquee-item">DIMEXOI<span>///</span></span>
+        <span class="marquee-item">BOIS D'ORIENT<span>///</span></span>
+        <span class="marquee-item">CŒUR D'ACIER<span>///</span></span>
+        <span class="marquee-item">CHR DISCOUNT OI<span>///</span></span>
+        <span class="marquee-item">ADDARIO CUISINES<span>///</span></span>
+        <span class="marquee-item">STAR LITERIE<span>///</span></span>
+        <span class="marquee-item">DIMEXOI<span>///</span></span>
+        <span class="marquee-item">BOIS D'ORIENT<span>///</span></span>
+        <span class="marquee-item">CŒUR D'ACIER<span>///</span></span>
+        <span class="marquee-item">CHR DISCOUNT OI<span>///</span></span>
+        <span class="marquee-item">ADDARIO CUISINES<span>///</span></span>
+        <span class="marquee-item">STAR LITERIE<span>///</span></span>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- COMPETENCES -->
-<section id="competences" style="background:var(--paper);">
+<section id="competences">
   <div class="sec-inner">
     <div class="sec-eyebrow r">Savoir-faire</div>
     <h2 class="sec-title r">Mes <em>compétences</em></h2>
     <p class="sec-desc r">Trois piliers complémentaires pour une communication groupe moderne.</p>
     <div class="skills-grid">
-      <div class="skill-cell r"><div class="skill-num">01</div><h3>Stratégie & Marque</h3><p>Communication multimarques, storytelling, identité de marque, positionnement groupe</p></div>
-      <div class="skill-cell r" style="transition-delay:0.05s"><div class="skill-num">02</div><h3>Création & Digital</h3><p>Photo, vidéo, montage, visuels print & digitaux, réseaux sociaux, newsletters, WordPress / WooCommerce</p></div>
-      <div class="skill-cell r" style="transition-delay:0.1s"><div class="skill-num">03</div><h3>No Code & IA</h3><p>Claude, ChatGPT, Claude Code, Cowork, Glide, Zapier — automatisation workflows, optimisation contenus</p></div>
-      <div class="skill-cell r" style="transition-delay:0.05s"><div class="skill-num">04</div><h3>Analyse & Reporting</h3><p>Suivi performance, reporting mensuel, amélioration continue, KPIs engagement & trafic</p></div>
-      <div class="skill-cell r" style="transition-delay:0.1s"><div class="skill-num">05</div><h3>Coordination Terrain</h3><p>Interface direction / équipes, objectifs commerciaux, pilotage transversal multi-enseignes</p></div>
-      <div class="skill-cell r" style="transition-delay:0.15s"><div class="skill-num">06</div><h3>Autonomie Complète</h3><p>Gestion intégrale du poste sans équipe dédiée — décision, priorisation, exécution</p></div>
+      <div class="skill-cell pop"><div class="skill-num">01</div><h3>Stratégie & Marque</h3><p>Communication multimarques, storytelling, identité de marque, positionnement groupe</p></div>
+      <div class="skill-cell pop" style="transition-delay:0.05s"><div class="skill-num">02</div><h3>Création & Digital</h3><p>Photo, vidéo, montage, visuels print & digitaux, réseaux sociaux, newsletters, WordPress / WooCommerce</p></div>
+      <div class="skill-cell pop" style="transition-delay:0.1s"><div class="skill-num">03</div><h3>No Code & IA</h3><p>Claude, ChatGPT, Claude Code, Cowork, Glide, Zapier — automatisation workflows, optimisation contenus</p></div>
+      <div class="skill-cell pop" style="transition-delay:0.05s"><div class="skill-num">04</div><h3>Analyse & Reporting</h3><p>Suivi performance, reporting mensuel, amélioration continue, KPIs engagement & trafic</p></div>
+      <div class="skill-cell pop" style="transition-delay:0.1s"><div class="skill-num">05</div><h3>Coordination Terrain</h3><p>Interface direction / équipes, objectifs commerciaux, pilotage transversal multi-enseignes</p></div>
+      <div class="skill-cell pop" style="transition-delay:0.15s"><div class="skill-num">06</div><h3>Autonomie Complète</h3><p>Gestion intégrale du poste sans équipe dédiée — décision, priorisation, exécution</p></div>
     </div>
   </div>
 </section>
@@ -629,9 +702,9 @@ footer {
     <div class="sec-eyebrow r">Formation</div>
     <h2 class="sec-title r">Mes <em>diplômes</em></h2>
     <div class="dip-grid" style="margin-top:40px;">
-      <div class="dip-cell r"><div class="dip-year">2020</div><h3>Master Webmarketing et Social Media</h3><p>Créalise de La Réunion</p><span class="dip-tag">alternance</span></div>
-      <div class="dip-cell r" style="transition-delay:0.05s"><div class="dip-year">2018</div><h3>Licence Communication</h3><p>Université de La Réunion</p></div>
-      <div class="dip-cell r" style="transition-delay:0.1s"><div class="dip-year">2017</div><h3>DUT Gestion des entreprises</h3><p>IUT de La Réunion</p><span class="dip-tag">alternance</span></div>
+      <div class="dip-cell pop"><div class="dip-year">2020</div><h3>Master Webmarketing et Social Media</h3><p>Créalise de La Réunion</p><span class="dip-tag">alternance</span></div>
+      <div class="dip-cell pop" style="transition-delay:0.05s"><div class="dip-year">2018</div><h3>Licence Communication</h3><p>Université de La Réunion</p></div>
+      <div class="dip-cell pop" style="transition-delay:0.1s"><div class="dip-year">2017</div><h3>DUT Gestion des entreprises</h3><p>IUT de La Réunion</p><span class="dip-tag">alternance</span></div>
     </div>
   </div>
 </section>
@@ -840,13 +913,17 @@ footer {
 
 <!-- CONTACT -->
 <section id="contact">
+  <div class="confetti confetti-circle" style="top:10%;left:8%;width:18px;height:18px;background:var(--buttercup);animation-delay:.1s,0s;"></div>
+  <div class="confetti confetti-triangle" style="top:78%;left:6%;color:var(--lime);animation-delay:.5s,.6s;"></div>
+  <div class="confetti confetti-square" style="top:14%;left:90%;width:20px;height:20px;background:var(--frost);animation-delay:.3s,.3s;"></div>
+  <div class="confetti confetti-circle" style="top:82%;left:88%;width:16px;height:16px;background:var(--burnt);animation-delay:.6s,.1s;"></div>
   <div class="sec-inner">
     <div class="sec-eyebrow r">Disponible</div>
     <h2 class="sec-title r">Me <em>contacter</em></h2>
     <div class="contact-grid" style="margin-top:40px;">
-      <a href="mailto:p.laurence140297@gmail.com" class="contact-cell r"><div class="cc-icon">✉</div><h3>Email</h3><p>p.laurence140297@gmail.com</p></a>
-      <a href="tel:+262692430106" class="contact-cell r" style="transition-delay:0.05s"><div class="cc-icon">☎</div><h3>Téléphone</h3><p>0692 43 01 06</p></a>
-      <a href="#" class="contact-cell r" style="transition-delay:0.1s"><div class="cc-icon">◉</div><h3>Localisation</h3><p>Piton St-Leu, La Réunion</p></a>
+      <a href="mailto:p.laurence140297@gmail.com" class="contact-cell pop"><div class="cc-icon">✉</div><h3>Email</h3><p>p.laurence140297@gmail.com</p></a>
+      <a href="tel:+262692430106" class="contact-cell pop" style="transition-delay:0.08s"><div class="cc-icon">☎</div><h3>Téléphone</h3><p>0692 43 01 06</p></a>
+      <a href="#" class="contact-cell pop" style="transition-delay:0.16s"><div class="cc-icon">◉</div><h3>Localisation</h3><p>Piton St-Leu, La Réunion</p></a>
     </div>
   </div>
 
@@ -856,12 +933,14 @@ footer {
 <script>
 /* ── Scroll Reveal ── */
 (function(){
+  const REVEAL_SEL = '.r:not(.v),.r-l:not(.v),.r-r:not(.v),.pop:not(.v),.pop-r:not(.v),.sec-eyebrow:not(.v),.hero-eyebrow:not(.v)';
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
-        const els = entry.target.querySelectorAll('.r:not(.v),.r-l:not(.v),.r-r:not(.v)');
+        const els = entry.target.querySelectorAll(REVEAL_SEL);
         els.forEach((el, i) => {
-          setTimeout(() => el.classList.add('v'), 100 + i * 80);
+          setTimeout(() => el.classList.add('v'), 100 + i * 60);
         });
       }
     });
@@ -870,9 +949,35 @@ footer {
   document.querySelectorAll('section, .stats-strip').forEach(sec => observer.observe(sec));
 
   /* Trigger hero immediately */
-  document.querySelectorAll('.hero .r, .hero .r-l, .hero .r-r').forEach((el, i) => {
+  document.querySelectorAll('.hero .r, .hero .r-l, .hero .r-r, .hero .pop, .hero .pop-r, .hero .hero-eyebrow').forEach((el, i) => {
     setTimeout(() => el.classList.add('v'), 300 + i * 80);
   });
+
+  /* ── Animated stat counters (mirrors the "7 ans" pop from the intro video) ── */
+  const statEls = document.querySelectorAll('.stat-count');
+  if(statEls.length){
+    let counted = false;
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && !counted){
+          counted = true;
+          statEls.forEach(el => {
+            const target = parseInt(el.dataset.target, 10);
+            const duration = 900;
+            const start = performance.now();
+            function tick(now){
+              const p = Math.min(1, (now - start) / duration);
+              const eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(eased * target);
+              if(p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+        }
+      });
+    }, { threshold:0.4 });
+    statObserver.observe(document.querySelector('.stats-strip'));
+  }
 
   /* Nav active on scroll */
   const navLinks = document.querySelectorAll('.nav-links a');
